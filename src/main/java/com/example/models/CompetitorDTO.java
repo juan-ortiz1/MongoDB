@@ -1,9 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
  */
-
 package com.example.models;
 
 /**
@@ -11,26 +10,19 @@ package com.example.models;
  * @author Mauricio
  */
 public class CompetitorDTO {
- 
+
     private String name;
-    
     private String surname;
-    
     private int age;
-    
     private String telephone;
-    
     private String cellphone;
-    
     private String address;
-    
     private String city;
-    
     private String country;
-    
-    
-    public CompetitorDTO(){
-        
+    private Vehicle vehicle;
+    private ProductoDTO producto;
+
+    public CompetitorDTO() {
     }
 
     public String getName() {
@@ -95,6 +87,22 @@ public class CompetitorDTO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public ProductoDTO getProducto() {
+        return producto;
+    }
+
+    public void setProducto(ProductoDTO producto) {
+        this.producto = producto;
     }
     
 }

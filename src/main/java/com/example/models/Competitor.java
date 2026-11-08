@@ -1,71 +1,72 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
  */
-
 package com.example.models;
 
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.JoinField;
+import org.eclipse.persistence.nosql.annotations.NoSql;
 
 /**
  *
  * @author Mauricio
  */
+@NoSql(dataFormat = DataFormatType.MAPPED)
 @Entity
 @XmlRootElement
-public class Competitor implements Serializable{
-     private static final long serialVersionUID = 1L;
-     
+public class Competitor implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
+    @GeneratedValue
+    @Field(name = "_id")
+    private String id;
     @NotNull
     @Column(name = "create_at", updatable = false)
     @Temporal(TemporalType.DATE)
     private Calendar createdAt;
-
     @NotNull
     @Column(name = "updated_at")
     @Temporal(TemporalType.DATE)
     private Calendar updatedAt;
-    
     private String name;
-    
     private String surname;
-    
     private int age;
-    
     private String telephone;
-    
     private String cellphone;
-    
     private String address;
-    
     private String city;
-    
     private String country;
-    
     private boolean winner;
     //
     
-    public Competitor(){
-        
+    @Embedded
+    private Vehicle vehicle;
+    @OneToOne
+    @JoinField(name = "producto_id")
+    private Producto producto;
+
+    public Competitor() {
     }
-    
+
     @PreUpdate
     private void updateTimestamp() {
         this.updatedAt = Calendar.getInstance();
@@ -76,11 +77,11 @@ public class Competitor implements Serializable{
         this.createdAt = this.updatedAt = Calendar.getInstance();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -155,5 +156,22 @@ public class Competitor implements Serializable{
     public void setWinner(boolean winner) {
         this.winner = winner;
     }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+    
     
 }
